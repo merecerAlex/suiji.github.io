@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h2>这是大学生做的测试网页！</h2>
+        
+        
+        <button onclick="copyPresetText()">点击复制文案</button>
+        
+    </div>
+
+    <script>
+        // 预设文案库
+        const presetTexts = [
+            "优质文案第一条：春天是希望的季节",
+            "精选内容：知识改变命运，学习成就未来",
+            "每日一句：坚持不懈，终会成功",
+            "推荐文案：科技创新引领时代发展",
+            "经典语录：读万卷书，行万里路"
+        ];
+
+        // 提示消息库
+        const messages = [
+            "🎉 文案已复制到剪贴板！",
+            "✨ 这条文案不错吧？",
+            "📋 复制成功，快去粘贴使用~",
+            "✅ 已成功获取精选文案",
+            "🌟 每日好文已就位！"
+        ];
+
+        function copyPresetText() {
+            // 随机选择文案和提示
+            const randomIndex = Math.floor(Math.random() * presetTexts.length);
+            const selectedText = presetTexts[randomIndex];
+            const selectedMessage = messages[randomIndex % messages.length];
+            
+            // 创建临时输入框
+            const tempInput = document.createElement("textarea");
+            tempInput.value = selectedText;
+            document.body.appendChild(tempInput);
+            
+            // 执行复制操作
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            
+            alert(`${selectedMessage}\n\n已复制内容：\n「${selectedText}」`);
+        }
+    </script>
+</body>
+</html>
