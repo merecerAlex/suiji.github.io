@@ -10,72 +10,85 @@
             margin: 20px auto;
             padding: 0 20px;
         }
-        .container {
-            text-align: center;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
         }
-        button {
-            padding: 8px 16px;
-            margin: 10px;
-            cursor: pointer;
-            background-color: #4CAF50;
+        .grid-item {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .copy-btn {
+            background: #4CAF50;
             color: white;
             border: none;
+            padding: 10px 25px;
             border-radius: 4px;
+            cursor: pointer;
+            margin: 15px 0;
+        }
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>一个页面</h1>
-        <p>mereceralex.github.io</p>
-        
+    <div style="text-align: center;">
         <h2>这是大学生做的测试网页！</h2>
         <p>6zqp56mtkyymlba.dianyitong.net</p>
-        
-        <p><strong>试使用execCommand方法复制文字。</strong></p>
-        
-        <button onclick="copyPresetText()">点击复制文案</button>
-        
-        <hr>
-        
-        <h3>我的微博</h3>
-        <p>保存整页为图片 ></p>
+        <p>这一页测试使用execCommand方法复制文字。</p>
+
+        <div class="grid-container">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+
+        <button class="copy-btn" onclick="copyArticle()">复制文章</button>
+
+        <footer>
+            <p>队长<br>河南 郑州</p>
+            <p>我的微博 | 保存整页为图片 ></p>
+        </footer>
     </div>
 
     <script>
-        // 预设文案库
-        const presetTexts = [
-            "优质文案第一条：春天是希望的季节",
-            "精选内容：知识改变命运，学习成就未来",
-            "每日一句：坚持不懈，终会成功",
-            "推荐文案：科技创新引领时代发展",
-            "经典语录：读万卷书，行万里路"
+        const articles = [
+            "春江潮水连海平，海上明月共潮生。",
+            "滟滟随波千万里，何处春江无月明！",
+            "江流宛转绕芳甸，月照花林皆似霰；",
+            "空里流霜不觉飞，汀上白沙看不见。"
         ];
 
-        // 提示消息库
-        const messages = [
-        
-            "📋 复制成功，快去粘贴使用~",
-           
-        ];
-
-        function copyPresetText() {
-            // 随机选择文案和提示
-            const randomIndex = Math.floor(Math.random() * presetTexts.length);
-            const selectedText = presetTexts[randomIndex];
-            const selectedMessage = messages[randomIndex % messages.length];
+        function copyArticle() {
+            // 随机选择文章
+            const content = articles[Math.floor(Math.random() * articles.length)];
             
             // 创建临时输入框
-            const tempInput = document.createElement("textarea");
-            tempInput.value = selectedText;
-            document.body.appendChild(tempInput);
+            const temp = document.createElement("textarea");
+            temp.value = content;
+            document.body.appendChild(temp);
             
-            // 执行复制操作
-            tempInput.select();
+            // 执行复制
+            temp.select();
             document.execCommand("copy");
-            document.body.removeChild(tempInput);
+            document.body.removeChild(temp);
             
-            alert(`${selectedMessage}\n\n已复制内容：\n「${selectedText}」`);
+            // 提示消息
+            const messages = [
+                "文章已复制到剪贴板！",
+                "复制成功，快去粘贴吧！",
+                "精选内容已就绪！",
+                "文案复制成功！"
+            ];
+            alert(messages[Math.floor(Math.random() * messages.length)]);
         }
     </script>
 </body>
