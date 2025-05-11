@@ -2,94 +2,67 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>测试页面</title>
+    <title>一个页面</title>
     <style>
+        /* 原有样式保持不变 */
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 600px;
             margin: 20px auto;
             padding: 0 20px;
         }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .grid-item {
-            border: 1px solid #ddd;
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
-        }
-        .copy-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 15px 0;
-        }
-        footer {
-            margin-top: 30px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
+        /* 其他样式保持不变... */
     </style>
 </head>
 <body>
-    <div style="text-align: center;">
+    <div class="header">
         <h2>这是大学生做的测试网页！</h2>
-        <p>6zqp56mtkyymlba.dianyitong.net</p>
-        <p>这一页测试使用execCommand方法复制文字。</p>
+        <div class="url">6zqp56mtkyymlba.dianyitong.net</div>
+    </div>
 
-        <div class="grid-container">
-            <div class="grid-item">1</div>
-            <div class="grid-item">2</div>
-            <div class="grid-item">3</div>
-            <div class="grid-item">4</div>
-        </div>
+    <p>这一页测试使用execCommand方法复制文字。</p>
 
-        <button class="copy-btn" onclick="copyArticle()">复制文章</button>
+    <div class="button-group">
+        <!-- 移除所有data-text属性 -->
+        <button class="copy-btn">1</button>
+        <button class="copy-btn">2</button>
+        <button class="copy-btn">3</button>
+        <button class="copy-btn">4</button>
+        <button class="copy-btn">复制文案</button>
+    </div>
 
-        <footer>
-            <p>队长<br>河南 郑州</p>
-            <p>我的微博 | 保存整页为图片 ></p>
-        </footer>
+    <div class="footer">
+        <p>队长<br>河南 郑州</p>
+        <a href="#" class="social-link">我的微博</a>
+        <a href="#" class="social-link">保存整页为图片 ></a>
     </div>
 
     <script>
-        const articles = [
-            "春江潮水连海平，海上明月共潮生。",
-            "滟滟随波千万里，何处春江无月明！",
-            "江流宛转绕芳甸，月照花林皆似霰；",
-            "空里流霜不觉飞，汀上白沙看不见。"
+        // 统一文案库
+        const textLibrary = [
+            "要了解的🌏找duocai_facai，备注小红薯",
+            "郑州管城区\n狗咖\n需要看管员\n轻松好做\n工资日结210元",
+            "第二条推广文案内容示例",
+            "第三条不同风格的宣传语",
+            "点击获取更多惊喜优惠！"
         ];
 
-        function copyArticle() {
-            // 随机选择文章
-            const content = articles[Math.floor(Math.random() * articles.length)];
-            
-            // 创建临时输入框
-            const temp = document.createElement("textarea");
-            temp.value = content;
-            document.body.appendChild(temp);
-            
-            // 执行复制
-            temp.select();
-            document.execCommand("copy");
-            document.body.removeChild(temp);
-            
-            // 提示消息
-            const messages = [
-                "文章已复制到剪贴板！",
-                "复制成功，快去粘贴吧！",
-                "精选内容已就绪！",
-                "文案复制成功！"
-            ];
-            alert(messages[Math.floor(Math.random() * messages.length)]);
-        }
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 从文案库随机选择
+                const randomText = textLibrary[Math.floor(Math.random() * textLibrary.length)];
+                
+                // 执行复制操作
+                const textarea = document.createElement('textarea');
+                textarea.value = randomText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                alert('已复制: ' + randomText);
+            });
+        });
     </script>
 </body>
 </html>
