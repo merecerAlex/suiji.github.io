@@ -4,17 +4,53 @@
     <meta charset="UTF-8">
     <title>一个页面</title>
     <style>
-        /* 原有样式保持不变 */
+        /* 保持原有样式完全不变 */
         body {
             font-family: "Microsoft YaHei", sans-serif;
             max-width: 600px;
             margin: 20px auto;
             padding: 0 20px;
         }
-        /* 其他样式保持不变... */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .url {
+            color: #666;
+            margin: 10px 0;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .copy-btn {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1 1 40%;
+        }
+        .copy-btn:hover {
+            background: #45a049;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+        }
+        .social-link {
+            color: #2196F3;
+            text-decoration: none;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
+    <!-- 保持原有DOM结构不变 -->
     <div class="header">
         <h2>这是大学生做的测试网页！</h2>
         <div class="url">6zqp56mtkyymlba.dianyitong.net</div>
@@ -23,7 +59,7 @@
     <p>这一页测试使用execCommand方法复制文字。</p>
 
     <div class="button-group">
-        <!-- 移除所有data-text属性 -->
+        <!-- 保持按钮原始文字不变 -->
         <button class="copy-btn">1</button>
         <button class="copy-btn">2</button>
         <button class="copy-btn">3</button>
@@ -38,21 +74,22 @@
     </div>
 
     <script>
-        // 统一文案库
-        const textLibrary = [
+        // 统一文案库（可自行扩展）
+        const TEXT_LIBRARY = [
             "要了解的🌏找duocai_facai，备注小红薯",
             "郑州管城区\n狗咖\n需要看管员\n轻松好做\n工资日结210元",
-            "第二条推广文案内容示例",
-            "第三条不同风格的宣传语",
-            "点击获取更多惊喜优惠！"
+            "最新兼职：商场促销员\n日薪200元+提成\n联系电话13812345678",
+            "周末兼职：外卖配送\n多劳多得\n扫码立即报名",
+            "📢 急招！奶茶店店员\n工作时间灵活\n待遇面议"
         ];
 
+        // 保持原有复制逻辑结构
         document.querySelectorAll('.copy-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                // 从文案库随机选择
-                const randomText = textLibrary[Math.floor(Math.random() * textLibrary.length)];
+                // 从文案库随机选取
+                const randomText = TEXT_LIBRARY[Math.floor(Math.random() * TEXT_LIBRARY.length)];
                 
-                // 执行复制操作
+                // 保持原有复制方式
                 const textarea = document.createElement('textarea');
                 textarea.value = randomText;
                 document.body.appendChild(textarea);
@@ -60,7 +97,7 @@
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 
-                alert('已复制: ' + randomText);
+                alert('已复制: ' + randomText); // 保持原有提示方式
             });
         });
     </script>
